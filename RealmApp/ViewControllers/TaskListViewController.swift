@@ -35,7 +35,40 @@ final class TaskListViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    // MARK: - UITableViewDataSource
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        guard let tasksVC = segue.destination as? TasksViewController else { return }
+        let taskList = taskLists[indexPath.row]
+        tasksVC.taskList = taskList
+    }
+
+    @IBAction func sortingList(_ sender: UISegmentedControl) {
+        taskLists = switch sender.selectedSegmentIndex {
+        case 0:
+            taskLists.sorted(byKeyPath: "date")
+        default:
+            taskLists.sorted(byKeyPath: "title")
+        }
+        tableView.reloadData()
+    }
+    
+    @objc private func addButtonPressed() {
+        showAlert()
+    }
+    
+    private func createTempData() {
+        if !UserDefaults.standard.bool(forKey: "done") {
+            dataManager.createTempData { [unowned self] in
+                UserDefaults.standard.setValue(true, forKey: "done")
+                tableView.reloadData()
+            }
+        }
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension TaskListViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         taskLists.count
     }
@@ -45,12 +78,14 @@ final class TaskListViewController: UITableViewController {
         var content = cell.defaultContentConfiguration()
         let taskList = taskLists[indexPath.row]
         content.text = taskList.title
-        content.secondaryText = taskList.tasks.count.formatted()
+        content.secondaryText = taskList.tasks.filter{ !$0.isComplete }.count.formatted()
         cell.contentConfiguration = content
         return cell
     }
-    
-    // MARK: - UITableViewDelegate
+}
+
+// MARK: - UITableViewDelegate
+extension TaskListViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let taskList = taskLists[indexPath.row]
         
@@ -76,30 +111,6 @@ final class TaskListViewController: UITableViewController {
         doneAction.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         
         return UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
-    }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        guard let tasksVC = segue.destination as? TasksViewController else { return }
-        let taskList = taskLists[indexPath.row]
-        tasksVC.taskList = taskList
-    }
-
-    @IBAction func sortingList(_ sender: UISegmentedControl) {
-    }
-    
-    @objc private func addButtonPressed() {
-        showAlert()
-    }
-    
-    private func createTempData() {
-        if !UserDefaults.standard.bool(forKey: "done") {
-            dataManager.createTempData { [unowned self] in
-                UserDefaults.standard.setValue(true, forKey: "done")
-                tableView.reloadData()
-            }
-        }
     }
 }
 
