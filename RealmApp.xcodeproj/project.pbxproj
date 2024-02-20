@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11790E2C2B84A17D001DC069 /* Extension + UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11790E2B2B84A17D001DC069 /* Extension + UITableViewCell.swift */; };
 		A804828427103A010095A493 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A804828327103A010095A493 /* DataManager.swift */; };
 		A804828627103A100095A493 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A804828527103A100095A493 /* StorageManager.swift */; };
 		A804828827103BFD0095A493 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A804828727103BFD0095A493 /* TaskList.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11790E2B2B84A17D001DC069 /* Extension + UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITableViewCell.swift"; sourceTree = "<group>"; };
 		A804828327103A010095A493 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		A804828527103A100095A493 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		A804828727103BFD0095A493 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11790E2D2B84A1D2001DC069 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				11790E2B2B84A17D001DC069 /* Extension + UITableViewCell.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A81BC31C256FED21002D9595 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -86,8 +96,9 @@
 			isa = PBXGroup;
 			children = (
 				A81BC31C256FED21002D9595 /* ViewControllers */,
-				A83F5DA129E1AEAD00F58A5F /* Factories */,
+				11790E2D2B84A1D2001DC069 /* Extensions */,
 				A8969B33270F34B700F7DED0 /* Models */,
+				A83F5DA129E1AEAD00F58A5F /* Factories */,
 				A8969B34270F34C900F7DED0 /* Services */,
 				A8C2C60628B626750073F613 /* Storyboards */,
 				A8C2C60828B626980073F613 /* App */,
@@ -226,6 +237,7 @@
 				A804828627103A100095A493 /* StorageManager.swift in Sources */,
 				A872A12120E9D87400ECE2BA /* TaskListViewController.swift in Sources */,
 				A872A12320E9D88E00ECE2BA /* TasksViewController.swift in Sources */,
+				11790E2C2B84A17D001DC069 /* Extension + UITableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
